@@ -15,8 +15,11 @@ class Deck:
     import random
     random.shuffle(self.cards)
 
+  def burn(self):
+    self.cards.pop()
+
   def deal(self, player):
     player.add_card(self.cards.pop())
 
-  def add_to_board(self, table):
+  def lay_out(self, table):
     table.board.add_card(self.cards.pop())
