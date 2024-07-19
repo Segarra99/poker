@@ -5,9 +5,38 @@ class Hand:
   def add_card(self, card):
     self.cards.append(card)
 
-  def get_score(self, board):
-    score = 0
+  def get_combo(self, board):
     all_cards = self.cards + board
+
+    if self.is_royal_flush(all_cards):
+      return "Royal Flush"
+    elif self.is_straight_flush(all_cards):
+      return "Straight Flush"
+    elif self.is_four_of_a_kind(all_cards):
+      return "Four of a Kind"
+    elif self.is_full_house(all_cards):
+      return "Full House"
+    elif self.is_flush(all_cards):
+      return "Flush"
+    elif self.is_straight(all_cards):
+      return "Straight"
+    elif self.is_three_of_a_kind(all_cards):
+      return "Three of a Kind"
+    elif self.is_two_pairs(all_cards):
+      return "Two Pairs"
+    elif self.is_one_pair(all_cards):
+      return "One Pair"
+    else:
+      return "High Card"
+    
+  def get_high_card(cards):
+    value_map = {'J': 11, 'Q': 12, 'K': 13, 'A': 14}
+    for card in cards:
+        if card.value in value_map:
+            card.value = value_map[card.value]
+            
+    highest_card = max(cards, key=lambda card: card.value)
+    return highest_card.value
 
   def is_royal_flush(cards):
     if len(cards) < 5:
